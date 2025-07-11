@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Daily Questions – ChemStar AZ</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Override or add any small tweaks for question cards */
+      section {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+      .question-card {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        color: white;
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+      .show-answer-btn {
+        background-color: #00b4d8;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+      }
+      .show-answer-btn:hover {
+        background-color: #0096c7;
+      }
+      .answer-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+        margin-top: 10px;
+      }
+      .answer-content.show {
+        max-height: 2000px;
+      }
+      .question-img,
+      .answer-img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li><a href="index.html" class="nav-button">Home</a></li>
+          <li><a href="materials.html" class="nav-button">Materials</a></li>
+          <li><a href="questions.html" class="nav-button active">Daily Questions</a></li>
+          <li><a href="community.html" class="nav-button">Community & News</a></li>
+        </ul>
+        <div class="profile-icon">
+          <a href="login.html">
+            <img src="images/profile-default.jpg" alt="Profile" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section id="daily-questions-section">
+        <div id="questions-container">
+          <!-- Questions will be dynamically inserted here -->
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 ChemStar AZ</p>
+    </footer>
+
+    <script>
+      // Array of question-solution pairs
+      // Only include those that exist (you can update this list)
+      const questions = [
+        { question: "images/questions/question1.jpg", solution: "images/solutions/solution1.jpg" },
+        { question: "images/questions/question2.jpg", solution: "images/solutions/solution2.jpg" },
+        { question: "images/questions/question3.jpg", solution: "images/solutions/solution3.jpg" },
+        { question: "images/questions/question4.jpg", solution: "images/solutions/solution4.jpg" },
+        { question: "images/questions/question5.jpg", solution: "images/solutions/solution5.jpg" },
+        { question: "images/questions/question6.jpg", solution: "images/solutions/solution6.jpg" },
+        { question: "images/questions/question7.jpg", solution: "images/solutions/solution7.jpg" },
+        { question: "images/questions/question8.jpg", solution: "images/solutions/solution8.jpg" },
+        { question: "images/questions/question9.jpg", solution: "images/solutions/solution9.jpg" },
+        { question: "images/questions/question10.jpg", solution: "images/solutions/solution10.jpg" },
+        { question: "images/questions/question11.jpg", solution: "images/solutions/solution11.jpg" },
+        { question: "images/questions/question12.jpg", solution: "images/solutions/solution12.jpg" },
+        { question: "images/questions/question13.jpg", solution: "images/solutions/solution13.jpg" },
+        { question: "images/questions/question14.jpg", solution: "images/solutions/solution14.jpg" },
+        { question: "images/questions/question15.jpg", solution: "images/solutions/solution15.jpg" },
+        { question: "images/questions/question16.jpg", solution: "images/solutions/solution16.jpg" },
+        { question: "images/questions/question17.jpg", solution: "images/solutions/solution17.jpg" },
+        { question: "images/questions/question18.jpg", solution: "images/solutions/solution18.jpg" },
+        { question: "images/questions/question19.jpg", solution: "images/solutions/solution19.jpg" },
+        { question: "images/questions/question20.jpg", solution: "images/solutions/solution20.jpg" },
+        { question: "images/questions/question21.jpg", solution: "images/solutions/solution21.jpg" },
+        { question: "images/questions/question22.jpg", solution: "images/solutions/solution22.jpg" },
+        { question: "images/questions/question23.jpg", solution: "images/solutions/solution23.jpg" },
+        { question: "images/questions/question24.jpg", solution: "images/solutions/solution24.jpg" },
+        { question: "images/questions/question25.jpg", solution: "images/solutions/solution25.jpg" },
+        { question: "images/questions/question26.jpg", solution: "images/solutions/solution26.jpg" },
+        { question: "images/questions/question27.jpg", solution: "images/solutions/solution27.jpg" },
+        { question: "images/questions/question28.jpg", solution: "images/solutions/solution28.jpg" },
+        { question: "images/questions/question29.jpg", solution: "images/solutions/solution29.jpg" },
+        { question: "images/questions/question30.jpg", solution: "images/solutions/solution30.jpg" },
+        { question: "images/questions/question31.jpg", solution: "images/solutions/solution31.jpg" },
+        { question: "images/questions/question32.jpg", solution: "images/solutions/solution32.jpg" },
+        { question: "images/questions/question33.jpg", solution: "images/solutions/solution33.jpg" },
+        { question: "images/questions/question34.jpg", solution: "images/solutions/solution34.jpg" },
+        { question: "images/questions/question35.jpg", solution: "images/solutions/solution35.jpg" },
+        { question: "images/questions/question36.jpg", solution: "images/solutions/solution36.jpg" },
+        { question: "images/questions/question37.jpg", solution: "images/solutions/solution37.jpg" },
+        { question: "images/questions/question38.jpg", solution: "images/solutions/solution38.jpg" },
+        { question: "images/questions/question39.jpg", solution: "images/solutions/solution39.jpg" },
+        { question: "images/questions/question40.jpg", solution: "images/solutions/solution40.jpg" },
+        { question: "images/questions/question41.jpg", solution: "images/solutions/solution41.jpg" },
+        { question: "images/questions/question42.jpg", solution: "images/solutions/solution42.jpg" },
+        { question: "images/questions/question43.jpg", solution: "images/solutions/solution43.jpg" },
+        { question: "images/questions/question44.jpg", solution: "images/solutions/solution44.jpg" },
+        { question: "images/questions/question45.jpg", solution: "images/solutions/solution45.jpg" },
+        { question: "images/questions/question46.jpg", solution: "images/solutions/solution46.jpg" },
+        { question: "images/questions/question47.jpg", solution: "images/solutions/solution47.jpg" },
+        { question: "images/questions/question48.jpg", solution: "images/solutions/solution48.jpg" },
+        { question: "images/questions/question49.jpg", solution: "images/solutions/solution49.jpg" },
+        { question: "images/questions/question50.jpg", solution: "images/solutions/solution50.jpg" },
+        { question: "images/questions/question51.jpg", solution: "images/solutions/solution51.jpg" },
+        { question: "images/questions/question52.jpg", solution: "images/solutions/solution52.jpg" },
+        { question: "images/questions/question53.jpg", solution: "images/solutions/solution53.jpg" },
+        { question: "images/questions/question54.jpg", solution: "images/solutions/solution54.jpg" },
+        { question: "images/questions/question55.jpg", solution: "images/solutions/solution55.jpg" },
+        { question: "images/questions/question56.jpg", solution: "images/solutions/solution56.jpg" },
+        { question: "images/questions/question57.jpg", solution: "images/solutions/solution57.jpg" },
+        { question: "images/questions/question58.jpg", solution: "images/solutions/solution58.jpg" },
+        { question: "images/questions/question59.jpg", solution: "images/solutions/solution59.jpg" },
+        { question: "images/questions/question60.jpg", solution: "images/solutions/solution60.jpg" },
+        { question: "images/questions/question61.jpg", solution: "images/solutions/solution61.jpg" },
+        { question: "images/questions/question62.jpg", solution: "images/solutions/solution62.jpg" },
+        { question: "images/questions/question63.jpg", solution: "images/solutions/solution63.jpg" },
+        { question: "images/questions/question64.jpg", solution: "images/solutions/solution64.jpg" },
+        { question: "images/questions/question65.jpg", solution: "images/solutions/solution65.jpg" },
+        { question: "images/questions/question66.jpg", solution: "images/solutions/solution66.jpg" },
+        { question: "images/questions/question67.jpg", solution: "images/solutions/solution67.jpg" },
+        { question: "images/questions/question68.jpg", solution: "images/solutions/solution68.jpg" },
+        { question: "images/questions/question69.jpg", solution: "images/solutions/solution69.jpg" },
+        { question: "images/questions/question70.jpg", solution: "images/solutions/solution70.jpg" },
+        { question: "images/questions/question71.jpg", solution: "images/solutions/solution71.jpg" },
+        { question: "images/questions/question72.jpg", solution: "images/solutions/solution72.jpg" },
+        { question: "images/questions/question73.jpg", solution: "images/solutions/solution73.jpg" },
+        { question: "images/questions/question74.jpg", solution: "images/solutions/solution74.jpg" },
+        { question: "images/questions/question75.jpg", solution: "images/solutions/solution75.jpg" },
+        { question: "images/questions/question76.jpg", solution: "images/solutions/solution76.jpg" },
+        { question: "images/questions/question77.jpg", solution: "images/solutions/solution77.jpg" },
+        { question: "images/questions/question78.jpg", solution: "images/solutions/solution78.jpg" },
+        { question: "images/questions/question79.jpg", solution: "images/solutions/solution79.jpg" },
+        { question: "images/questions/question80.jpg", solution: "images/solutions/solution80.jpg" },
+        { question: "images/questions/question81.jpg", solution: "images/solutions/solution81.jpg" },
+        { question: "images/questions/question82.jpg", solution: "images/solutions/solution82.jpg" },
+        { question: "images/questions/question83.jpg", solution: "images/solutions/solution83.jpg" },
+        { question: "images/questions/question84.jpg", solution: "images/solutions/solution84.jpg" },
+        { question: "images/questions/question85.jpg", solution: "images/solutions/solution85.jpg" },
+        { question: "images/questions/question86.jpg", solution: "images/solutions/solution86.jpg" },
+        { question: "images/questions/question87.jpg", solution: "images/solutions/solution87.jpg" },
+        { question: "images/questions/question88.jpg", solution: "images/solutions/solution88.jpg" },
+        { question: "images/questions/question89.jpg", solution: "images/solutions/solution89.jpg" },
+        { question: "images/questions/question90.jpg", solution: "images/solutions/solution90.jpg" },
+        { question: "images/questions/question91.jpg", solution: "images/solutions/solution91.jpg" },
+        { question: "images/questions/question92.jpg", solution: "images/solutions/solution92.jpg" },
+        { question: "images/questions/question93.jpg", solution: "images/solutions/solution93.jpg" },
+        { question: "images/questions/question94.jpg", solution: "images/solutions/solution94.jpg" },
+        { question: "images/questions/question95.jpg", solution: "images/solutions/solution95.jpg" },
+        { question: "images/questions/question96.jpg", solution: "images/solutions/solution96.jpg" },
+        { question: "images/questions/question97.jpg", solution: "images/solutions/solution97.jpg" },
+        { question: "images/questions/question98.jpg", solution: "images/solutions/solution98.jpg" },
+        { question: "images/questions/question99.jpg", solution: "images/solutions/solution99.jpg" },
+        { question: "images/questions/question100.jpg", solution: "images/solutions/solution100.jpg" }
+        // Add more as you upload new questions/solutions
+      ];
+
+      const container = document.getElementById("questions-container");
+
+      questions.forEach(({ question, solution }, index) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+
+        card.innerHTML = `
+    <div class="question-container">
+      <img src="${question}" alt="Question ${index + 1}" class="question-img" />
+    </div>
+    <div class="answer-container">
+      <button class="show-answer-btn">Show Answer</button>
+      <div class="answer-content">
+        <img src="${solution}" alt="Solution ${index + 1}" class="answer-img" />
+      </div>
+    </div>
+  `;
+
+        // Hide card if question image fails to load
+        const questionImg = card.querySelector(".question-img");
+        questionImg.onerror = () => {
+          card.style.display = "none";
+        };
+
+        // Hide card if solution image fails to load
+        const solutionImg = card.querySelector(".answer-img");
+        solutionImg.onerror = () => {
+          card.style.display = "none";
+        };
+
+        container.appendChild(card);
+      });
+
+      // Add toggle functionality for Show Answer buttons
+      document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("show-answer-btn")) {
+          const answerContent = e.target.nextElementSibling;
+          answerContent.classList.toggle("show");
+          e.target.textContent = answerContent.classList.contains("show") ? "Hide Answer" : "Show Answer";
+        }
+      });
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="auth-status.js"></script>
+
+  </body>
+</html>

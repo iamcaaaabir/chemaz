@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChemStar AZ – Chemistry Olympiad</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-container">
+      <header>
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li><a href="index.html" class="nav-button active">Home</a></li>
+            <li><a href="materials.html" class="nav-button">Materials</a></li>
+            <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+            <li><a href="community.html" class="nav-button">Community & News</a></li>
+          </ul>
+          <div class="profile-icon">
+            <a href="login.html">
+              <img src="images/profile-default.jpg" alt="Profile" />
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <section id="intro" class="welcome">
+          <h2>Welcome!</h2>
+          <p>This site supports Azerbaijani students preparing for RFO, RFM, and AP Chemistry.</p>
+        </section>
+
+        <section class="tips-section">
+          <h2>🔬 Olympiad Tips for Success</h2>
+          <div class="tips-grid">
+            <div class="tip-card">
+              <h3>💡 Be Consistent</h3>
+              <p>Even 30 focused minutes a day builds real results over time.</p>
+            </div>
+            <div class="tip-card">
+              <h3>🧠 Prioritize Sleep</h3>
+              <p>Your brain needs rest to retain complex concepts like mechanisms and equations.</p>
+            </div>
+            <div class="tip-card">
+              <h3>🥦 Fuel Yourself</h3>
+              <p>Eat well, hydrate, and take care of your mental health — especially during prep season.</p>
+            </div>
+            <div class="tip-card">
+              <h3>📚 Practice Strategically</h3>
+              <p>Focus on past Olympiad papers and your weak spots — not just random topics.</p>
+            </div>
+            <div class="tip-card">
+              <h3>🤝 Ask & Discuss</h3>
+              <p>Don’t be afraid to ask questions — even advanced ones. This site is for that!</p>
+            </div>
+            <div class="tip-card">
+              <h3>🚶 Take Breaks</h3>
+              <p>Walk, stretch, or even listen to music. Your productivity depends on it.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="video-recommendation">
+          <h2>🎥 Recommended Video</h2>
+          <div class="video-text-wrapper">
+            <div class="video-wrapper">
+              <iframe
+                src="https://www.youtube.com/embed/9J5PiRnG0kQ"
+                title="YouTube video player"
+                allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+              </iframe>
+            </div>
+            <div class="video-description">
+              <h3>Welcome to Our Chemistry Channel!</h3>
+              <p>
+                Dive deep into chemistry concepts with our detailed tutorials, olympiad preparation tips, and fun
+                experiments. Subscribe and join the learning journey!
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="teacher-profile">
+          <div class="teacher-card">
+            <img src="images/teacher.jpg" alt="Teacher" class="teacher-photo" />
+            <div class="teacher-info">
+              <h3>👨‍🏫 Meet Your Instructor: Dr. Tural Ismayilov</h3>
+              <p>
+                National Chemistry Olympiad gold medalist, 10+ years of experience coaching top RFO, RFM, and AP
+                students in Azerbaijan. Join his courses and start your winning journey.
+              </p>
+
+              <form action="https://formsubmit.co/a.cabir009@gmail.com" method="POST" class="signup-form">
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_subject" value="New Course Registration Request" />
+                <input type="hidden" name="_next" value="https://iamcaaaabir.github.io/chemaz/thank-you.html" />
+
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" name="Name" id="name" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="text" name="Phone Number" id="phone" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="course">Select Course</label>
+                  <select name="Selected Course" id="course" required>
+                    <option value="">Choose...</option>
+                    <option value="RFM">RFM</option>
+                    <option value="RFO">RFO</option>
+                    <option value="AP Chemistry">AP Chemistry</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="send-request-btn">Send Request</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <p>© 2025 ChemStar AZ. Built with passion for Chemistry in Azerbaijan.</p>
+      </footer>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="auth-status.js"></script>
+
+  </body>
+</html>

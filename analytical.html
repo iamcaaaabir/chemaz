@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analytical Chemistry – ChemStar AZ</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .subsection {
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        color: #023e8a;
+      }
+
+      .subsection h2 {
+        color: #0077b6;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #0077b6;
+        padding-bottom: 5px;
+      }
+
+      .pdf-link {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #0077b6;
+        text-decoration: none;
+      }
+
+      .pdf-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li><a href="index.html" class="nav-button">Home</a></li>
+          <li><a href="materials.html" class="nav-button">Materials</a></li>
+          <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+          <li><a href="community.html" class="nav-button">Community & News</a></li>
+        </ul>
+        <div class="profile-icon">
+          <a href="login.html">
+            <img src="images/profile-default.jpg" alt="Profile" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="container">
+        <h1 style="text-align: center; margin: 30px 0; color: white">Analytical Chemistry</h1>
+        <div class="subsection">
+          <h2>Books</h2>
+          <a href="materials/analytical/book1.pdf" class="pdf-link" target="_blank">Şahinde Demirci Analitik kimya</a>
+          <a href="materials/analytical/book2.pdf" class="pdf-link" target="_blank">Fundamentals of Analytical Chemistry 10e By Douglas A Skoog</a>
+        </div>
+
+        <div class="subsection">
+          <h2>YouTube Resources</h2>
+          <a href="https://www.youtube.com/playlist?list=YOUR_ANALYTICAL_PLAYLIST" class="pdf-link" target="_blank">Watch: Fundamental sistemlərdə pH by Nariman Shirinli</a>
+          <a href="https://www.youtube.com/channel/YOUR_CHANNEL_LINK" class="pdf-link" target="_blank">Watch: Həllolma Hasili by Nariman Shirinli</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 ChemStar AZ. All rights reserved.</p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="auth-status.js"></script>
+  </body>
+</html>

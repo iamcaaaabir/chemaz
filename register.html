@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register – ChemStar AZ</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: url("images/chem-bg.png") no-repeat center center fixed;
+      background-size: cover;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: #ffffff;
+    }
+
+    .register-container {
+      background: rgba(0, 87, 146, 0.85);
+      padding: 25px 20px;
+      border-radius: 15px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-sizing: border-box;
+      margin: 40px auto;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"] {
+      width: 80%;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      background-color: #fff;
+      color: #333;
+      transition: background-color 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      background-color: #e6f0fa;
+    }
+
+    button {
+      background-color: #00b4d8;
+      border: none;
+      color: white;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 85%;
+      transition: background-color 0.25s ease;
+    }
+
+    button:hover {
+      background-color: #007ea7;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    }
+
+    #register-message {
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      min-height: 22px;
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+    }
+
+    nav a.nav-button {
+      background-color: #2d97bf;
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a.nav-button:hover {
+      background-color: rgba(255 255 255 / 0.45);
+    }
+
+    .profile-icon img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .profile-icon img:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <ul class="navbar-list">
+        <li><a href="index.html" class="nav-button">Home</a></li>
+        <li><a href="materials.html" class="nav-button">Materials</a></li>
+        <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+        <li><a href="community.html" class="nav-button">Community & News</a></li>
+      </ul>
+      <div class="profile-icon">
+        <a href="login.html">
+          <img src="images/profile-default.jpg" alt="Profile" />
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="register-container">
+      <h2>Create Account</h2>
+      <input type="text" id="fullName" placeholder="Full Name" required />
+      <input type="number" id="birthYear" placeholder="Birth Year (e.g. 2004)" required min="1900" max="2100" />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password (min 6 chars)" required minlength="6" />
+      <button onclick="register()">Register</button>
+      <p id="register-message"></p>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 ChemStar AZ. Built with passion for Chemistry in Azerbaijan.</p>
+  </footer>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+  <script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBW8V1lVacM_pxHxG_gc-nRQ0NGoyxzv4c",
+    authDomain: "chemaz.firebaseapp.com",
+    projectId: "chemaz",
+    storageBucket: "chemaz.firebasestorage.app",
+    messagingSenderId: "912959029271",
+    appId: "1:912959029271:web:d248c17ea45923cb601c52"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+
+  async function register() {
+    const fullName = document.getElementById("fullName").value.trim();
+    const birthYear = document.getElementById("birthYear").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const messageEl = document.getElementById("register-message");
+
+    messageEl.textContent = "Registering...'if this message isn't dissappearing please go to login page'";
+    console.log("🚀 Starting registration...");
+
+    if (!fullName || !birthYear || !email || !password) {
+      messageEl.textContent = "❌ Please fill in all fields.";
+      return;
+    }
+
+    const currentYear = new Date().getFullYear();
+    const age = currentYear - Number(birthYear);
+    if (age < 10 || age > 30) {
+      messageEl.textContent = "❌ Please enter a valid birth year.";
+      return;
+    }
+
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+      console.log("✅ User created:", user.uid);
+
+      // Update display name
+      await user.updateProfile({ displayName: fullName });
+      console.log("✅ Display name updated");
+
+      // Save to Firestore
+      await db.collection("users").doc(user.uid).set({
+        fullName,
+        birthYear: Number(birthYear),
+        email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+      console.log("✅ Firestore data saved");
+
+      messageEl.textContent = "✅ Registered successfully! Redirecting...";
+      setTimeout(() => {
+        window.location.href = "profile.html";
+      }, 1500);
+    } catch (error) {
+      console.error("❌ Registration error:", error);
+      messageEl.textContent = "❌ " + error.message;
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Profile – ChemStar AZ</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .profile-container {
+        max-width: 500px;
+        margin: 40px auto;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      .name {
+        color: #0077b6;
+      }
+      .profile-pic-wrapper {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+      .profile-pic {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #0077b6;
+        object-fit: cover;
+        cursor: pointer;
+      }
+      .edit-pic-button {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: #00b4d8;
+        color: white;
+        border-radius: 50%;
+        padding: 5px 8px;
+        cursor: pointer;
+        font-size: 16px;
+        border: 2px solid white;
+        user-select: none;
+      }
+      .logout-btn {
+        background-color: #e63946;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+      .logout-btn:hover {
+        background-color: #c72c3b;
+      }
+      /* Modal styles */
+      #avatarModal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        justify-content: center;
+        align-items: center;
+      }
+      #avatarModal .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+        width: 90%;
+        max-height: 70vh;
+        overflow-y: auto;
+        text-align: center;
+      }
+      #avatarModal h3 {
+        margin-bottom: 15px;
+        color: #0077b6;
+      }
+      .avatar-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(60px,1fr));
+        gap: 10px;
+      }
+      .avatar-grid img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: border-color 0.3s ease;
+        object-fit: cover;
+      }
+      .avatar-grid img:hover {
+        border-color: #00b4d8;
+      }
+      #closeModal {
+        margin-top: 15px;
+        background: #0077b6;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      #closeModal:hover {
+        background: #005f82;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li><a href="index.html" class="nav-button">Home</a></li>
+          <li><a href="materials.html" class="nav-button">Materials</a></li>
+          <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+          <li><a href="community.html" class="nav-button">Community & News</a></li>
+        </ul>
+        <div class="profile-icon">
+          <a href="profile.html">
+            <img src="images/profile-default.jpg" alt="Profile" id="profile-picc" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="profile-container">
+        <div class="profile-pic-wrapper">
+          <img src="images/profile-default.jpg" alt="User Photo" class="profile-pic" id="profile-pic" />
+          <label for="upload-photo" class="edit-pic-button" title="Change Profile Picture">✏️</label>
+          <input
+            type="file"
+            id="upload-photo"
+            accept="image/*"
+            style="display: none"
+            onchange="uploadProfilePhoto(event)" />
+        </div>
+
+        <h2 id="username" class="name">Loading...</h2>
+        <p id="user-email">Loading...</p>
+
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+        <button onclick="deleteAccount()" class="logout-btn">Delete Account</button>
+      </div>
+    </main>
+
+    <!-- Avatar Selection Modal -->
+    <div id="avatarModal">
+      <div class="modal-content">
+        <h3>Select a Profile Picture</h3>
+        <div class="avatar-grid" id="avatarGrid"></div>
+        <button id="closeModal" onclick="closeAvatarModal()">Cancel</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 ChemStar AZ. All rights reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyBW8V1lVacM_pxHxG_gc-nRQ0NGoyxzv4c",
+        authDomain: "chemaz.firebaseapp.com",
+        projectId: "chemaz",
+        storageBucket: "chemaz.firebasestorage.app",
+        messagingSenderId: "912959029271",
+        appId: "1:912959029271:web:d248c17ea45923cb601c52"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+
+      auth.onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById("username").textContent = user.displayName || "No Name";
+    document.getElementById("user-email").textContent = user.email;
+    document.getElementById("profile-pic").src = user.photoURL || "images/profile-default.jpg";
+
+    const navbarPic = document.getElementById("profile-picc");
+    if (navbarPic && user.photoURL) {
+      navbarPic.src = user.photoURL;
+    }
+
+    currentUser = user;
+  } else {
+    window.location.href = "login.html";
+  }
+});
+
+
+      function logout() {
+        auth.signOut().then(() => {
+          window.location.href = "login.html";
+        });
+      }
+
+      function deleteAccount() {
+        if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+          const user = firebase.auth().currentUser;
+          if (user) {
+            user
+              .delete()
+              .then(() => {
+                alert("Your account has been deleted.");
+                window.location.href = "index.html";
+              })
+              .catch((error) => {
+                if (error.code === "auth/requires-recent-login") {
+                  alert("Please log in again and try deleting your account.");
+                  firebase.auth().signOut().then(() => (window.location.href = "login.html"));
+                } else {
+                  alert(error.message);
+                }
+              });
+          } else {
+            alert("No user logged in.");
+          }
+        }
+      }
+
+      // Profile pic upload (optional, you can disable if you want only default avatars)
+      function uploadProfilePhoto(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        alert("Uploading profile photo is currently disabled because Firebase Storage is paid. Use default avatars instead.");
+        // If you want to enable upload to Firebase Storage in future, you can implement it here.
+      }
+
+      // Default avatar images (replace these with your actual images)
+      const defaultAvatars = [
+        "images/avatars/avatar1.png",
+        "images/avatars/avatar2.png",
+        "images/avatars/avatar3.png",
+        "images/avatars/avatar4.png",
+        "images/avatars/avatar5.png",
+        "images/avatars/avatar6.png",
+        "images/avatars/avatar7.png",
+        "images/avatars/avatar8.png",
+        "images/avatars/avatar9.png",
+        "images/avatars/avatar10.png",
+        "images/avatars/avatar11.png",
+        "images/avatars/avatar12.png",
+        "images/avatars/avatar13.png",
+        "images/avatars/avatar14.png",
+        "images/avatars/avatar15.png"
+      ];
+
+      // Show modal when clicking edit button
+      document.querySelector(".edit-pic-button").addEventListener("click", function(e) {
+        e.preventDefault();
+        openAvatarModal();
+      });
+
+      const avatarGrid = document.getElementById("avatarGrid");
+
+      function openAvatarModal() {
+        avatarGrid.innerHTML = "";
+        defaultAvatars.forEach((src) => {
+          const img = document.createElement("img");
+          img.src = src;
+          img.alt = "Avatar";
+          img.onclick = () => selectAvatar(src);
+          avatarGrid.appendChild(img);
+        });
+        document.getElementById("avatarModal").style.display = "flex";
+      }
+
+      function closeAvatarModal() {
+        document.getElementById("avatarModal").style.display = "none";
+      }
+
+      function selectAvatar(src) {
+        if (!currentUser) return alert("No user logged in.");
+        currentUser.updateProfile({ photoURL: src })
+          .then(() => {
+            document.getElementById("profile-pic").src = src;
+            alert("Profile picture updated!");
+            closeAvatarModal();
+          })
+          .catch((error) => {
+            alert("Failed to update profile picture: " + error.message);
+          });
+      }
+
+      let currentUser = null;
+    </script>
+  </body>
+</html>

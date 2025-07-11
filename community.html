@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChemStar AZ - Community & News</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Extra section styling to contrast with background */
+      .container {
+        max-width: 900px;
+        margin: 30px auto 50px auto;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        color: #023e8a;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 25px;
+      }
+      h2 {
+        margin-bottom: 15px;
+        color: #0077b6;
+        border-bottom: 3px solid #0077b6;
+        padding-bottom: 6px;
+      }
+      .news-item,
+      .community-item {
+        background: #e0f0ff;
+        border-radius: 10px;
+        padding: 15px 20px;
+        margin-bottom: 18px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+        font-weight: 600;
+      }
+      a.community-link {
+        color: #0077b6;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      a.community-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar" role="navigation" aria-label="Main Navigation">
+        <ul class="navbar-list">
+          <li><a href="index.html" class="nav-button">Home</a></li>
+          <li><a href="materials.html" class="nav-button">Materials</a></li>
+          <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+          <li><a href="community.html" class="nav-button active">Community & News</a></li>
+        </ul>
+        <div class="profile-icon">
+          <a href="login.html" title="Login">
+            <img src="images/profile-default.jpg" alt="User Profile" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container" role="main">
+      <h1>Community & News</h1>
+
+      <section class="news-section">
+        <h2>Latest News</h2>
+        <div class="news-item">
+          New Chemistry Course Starting!<br />
+          Join the advanced Olympiad preparation course starting on <em>August 1, 2025</em>. Registration opens July 20.
+        </div>
+        <div class="news-item">
+          ICYMI: ICHO Team Success<br />
+          Congratulations to the Azerbaijan ICHO team for winning <em>3 bronze medals</em> at the 2025 International
+          Chemistry Olympiad!
+        </div>
+      </section>
+
+      <section class="community-section">
+        <h2>Community Activities</h2>
+        <div class="community-item">
+          Football Matches:<br />
+          Join fellow ChemStar members every Saturday at 4 PM for friendly football games. All skill levels welcome!
+        </div>
+        <div class="community-item">
+          Minecraft Server for Chemists:<br />
+          Explore chemistry-themed worlds and challenges on our private Minecraft server! Connect and build together.
+          <a href="#" class="community-link">Join the server</a>
+        </div>
+        <div class="community-item">
+          Chemistry Quiz Game:<br />
+          Coming soon: a fun multiplayer quiz game to test your chemistry knowledge. Stay tuned!
+        </div>
+      </section>
+    </main>
+
+    <footer>&copy; 2025 ChemStar AZ - All Rights Reserved</footer>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="auth-status.js"></script>
+  </body>
+</html>

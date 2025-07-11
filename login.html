@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login – ChemStar AZ</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        background: url("images/chem-bg.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        color: #ffffff;
+      }
+
+      .login-container {
+        background: rgba(0, 87, 146, 0.85);
+        padding: 25px 20px;
+        border-radius: 15px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+        width: 90%;
+        max-width: 500px;
+        text-align: center;
+        box-sizing: border-box;
+      }
+
+      @media (max-width: 600px) {
+        .login-container {
+          width: 95%;
+          max-width: 300px;
+          padding: 20px 15px;
+        }
+
+        .btn-group {
+          flex-direction: column;
+          gap: 10px;
+        }
+
+        button {
+          width: 100%;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+          width: 100%;
+        }
+      }
+
+      .login-container h2 {
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 80%;
+        padding: 12px 14px;
+        margin-bottom: 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        outline: none;
+        background-color: #fff;
+        color: #333;
+        /* Removed box-shadow/glow */
+        transition: background-color 0.2s ease;
+      }
+
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        background-color: #e6f0fa;
+        /* No glow effect */
+      }
+
+      .btn-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      button {
+        flex: 1;
+        background-color: #00b4d8;
+        border: none;
+        color: white;
+        padding: 12px 0;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 1rem;
+        cursor: pointer;
+        /* Removed box-shadow and glow */
+        transition: background-color 0.25s ease;
+      }
+
+      button:hover {
+        background-color: #007ea7;
+        /* No transform or glow */
+      }
+
+      #auth-message {
+        margin-top: 20px;
+        font-weight: 600;
+        font-size: 1rem;
+        min-height: 22px;
+        text-shadow: 0 0 2px rgba(0, 0, 0, 0.4);
+      }
+      nav a.nav-button {
+        background-color: #2d97bf;
+        color: #ffffff;
+        padding: 8px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background-color 0.3s ease;
+      }
+
+      nav a.nav-button:hover {
+        background-color: rgba(255 255 255 / 0.45);
+      }
+
+      .profile-icon img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .profile-icon img:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul class="navbar-list">
+          <li><a href="index.html" class="nav-button">Home</a></li>
+          <li><a href="materials.html" class="nav-button">Materials</a></li>
+          <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+                  <li><a href="community.html" class="nav-button">Community & News</a></li>
+
+        </ul>
+        <div class="profile-icon">
+          <a href="login.html">
+            <img src="images/profile-default.jpg" alt="Profile" />
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="login-page-wrapper">
+      <main class="login-container">
+        <h2>Login / Register</h2>
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required minlength="6" />
+        <div class="btn-group">
+          <button onclick="login()">Login</button>
+          <button onclick="window.location.href='register.html'">Register</button>
+          <button type="button" onclick="resetPassword()">Forgot Password?</button>
+        </div>
+        <p id="auth-message"></p>
+      </main>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="auth.js"></script>
+  </body>
+</html>

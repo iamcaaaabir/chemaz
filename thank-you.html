@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thank You – ChemStar AZ</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Centered thank you box */
+      .thank-you-box {
+        max-width: 600px;
+        margin: 120px auto;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 40px 30px;
+        border-radius: 16px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        font-size: 1.2rem;
+        max-height: 225px;
+      }
+      .thank-you-box h2 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+      }
+      .thank-you-box p {
+        line-height: 1.5;
+      }
+      /* Navbar ul override to keep profile icon right */
+      nav ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 15px;
+      }
+      nav ul li.profile-icon {
+        margin-left: auto;
+      }
+      nav ul li.profile-icon img {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        border: 2px solid white;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      nav ul li.profile-icon img:hover {
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="index.html" class="nav-button">Home</a></li>
+          <li><a href="materials.html" class="nav-button">Materials</a></li>
+          <li><a href="questions.html" class="nav-button">Daily Questions</a></li>
+          <li><a href="community.html" class="nav-button">Community & News</a></li>
+
+          <li class="profile-icon">
+            <a href="login.html">
+              <img src="images/profile-default.jpg" alt="Profile" />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="thank-you-box">
+      <h2>🎉 Thank You for Registering!</h2>
+      <p>We will contact you shortly with more details about your selected course.</p>
+    </section>
+
+    <footer>
+      <p>© 2025 ChemStar AZ. Built with passion for Chemistry in Azerbaijan.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      // Launch confetti once when page loads
+      window.onload = () => {
+        confetti({
+          particleCount: 1500,
+          spread: 400,
+          origin: { y: 0.6 }
+        });
+      };
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="auth-status.js"></script>
+  </body>
+</html>
